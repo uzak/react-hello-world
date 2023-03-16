@@ -1,12 +1,15 @@
 NAME = react-hello-world
+REPO = 532993743491.dkr.ecr.eu-central-1.amazonaws.com
+FULL_NAME = $(REPO)/$(NAME):latest
 
-build-docker: 
-	docker build . -t $(NAME)
+build-image: 
+	docker build . -t $(NAME) 
+	docker tag $(NAME) $(FULL_NAME)
 
 push-image:
-	docker push $(NAME):latest
+	docker push $(FULL_NAME)
 
-run-docker:
+run:
 	docker run -p 3000:80 $(NAME)
 
 # vim:ft=make
